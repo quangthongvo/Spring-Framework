@@ -11,8 +11,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.UUID;
 
-public interface CommentRepository extends JpaRepository<Comment, Long> {
+public interface CommentRepository extends JpaRepository<Comment, UUID> {
 
     // cach 1: method name
     // tien to: findBy, existBy, countBy, deleteBy
@@ -22,10 +23,13 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     // lay ra tat ca cac comment co body chua "search"
 
     List<Comment> findByBodyContaining(String search);
+
     // lay ra tat ca cac comment theo name hoac email
     List<Comment> findByNameOrEmail(String name, String email);
+
     // lay ra tat ca cac comment theo post id
     Page<Comment> findByPostId(Long postId, Pageable pageable);
+
     // cach 2. @Query
     //
     @Modifying
@@ -36,6 +40,4 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     @Query("DELETE FROM Comment WHERE name = ?1 AND email = ?2")
     void deleteByNameAndEmail(String name, String email);
 
-    @Query( value = " SELECT * FROM comment WHERE id > ?1",nativeQuery = true)
-    Page<CommentDto> findByIdGreaterThan(Long id , Pageable pageable );
 }
