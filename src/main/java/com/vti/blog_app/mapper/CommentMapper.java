@@ -8,24 +8,26 @@ import com.vti.blog_app.form.CommentUpdateForm;
 public class CommentMapper {
     public static Comment map(CommentCreateForm form){
         var comment = new Comment();
-        comment.setName(form.getName());
-        comment.setEmail(form.getEmail());
-        comment.setBody(form.getBody());
+        var pk = new Comment.primaryKey();
+        pk.setName(form.getName());
+        pk.setEmail(form.getEmail());
+        comment.setPk(comment.getPk());
+        comment.setBody(comment.getBody());
         return comment;
     }
     public static CommentDto map(Comment comment){
         var dto = new CommentDto();
-        dto.setId(comment.getId());
-        dto.setName(comment.getName());
-        dto.setEmail(comment.getEmail());
+        dto.setPk(comment.getPk());
         dto.setBody(comment.getBody());
         dto.setCreatedAt(comment.getCreateAt());
         dto.setUpdatedAt(comment.getUpdateAt());
         return dto;
     }
     public static void map(CommentUpdateForm form, Comment comment){
-        comment.setName(form.getName());
-        comment.setEmail(form.getEmail());
+        var pk = new Comment.primaryKey();
+        pk.setName(form.getName());
+        pk.setEmail(form.getEmail());
+        comment.setPk(comment.getPk());
         comment.setBody(form.getBody());
     }
 }

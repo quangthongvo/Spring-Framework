@@ -1,6 +1,7 @@
 package com.vti.blog_app.service;
 
 import com.vti.blog_app.dto.CommentDto;
+import com.vti.blog_app.entity.Comment;
 import com.vti.blog_app.form.CommentCreateForm;
 import com.vti.blog_app.form.CommentUpdateForm;
 import com.vti.blog_app.mapper.CommentMapper;
@@ -35,7 +36,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentDto findById(String id) {
+    public CommentDto findById(Comment.primaryKey id) {
         return commentRepository.findById(id)
                 .map(CommentMapper::map)
                 .orElse(null);
@@ -56,7 +57,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentDto update(String id, CommentUpdateForm form) {
+    public CommentDto update(Comment.primaryKey id, CommentUpdateForm form) {
         var optional = commentRepository.findById(id);
         if (optional.isEmpty()){
             return null;
@@ -68,13 +69,12 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void deleteById(String id) {
+    public void deleteById(Comment.primaryKey id) {
         commentRepository.deleteById(id);
     }
 
     @Override
     @Transactional
     public void deleteByEmail(String email) {
-        commentRepository.deleteByEmail(email);
     }
 }

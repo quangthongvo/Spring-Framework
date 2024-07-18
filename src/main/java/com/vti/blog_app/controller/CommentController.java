@@ -1,6 +1,7 @@
 package com.vti.blog_app.controller;
 
 import com.vti.blog_app.dto.CommentDto;
+import com.vti.blog_app.entity.Comment;
 import com.vti.blog_app.form.CommentCreateForm;
 import com.vti.blog_app.form.CommentUpdateForm;
 import com.vti.blog_app.service.CommentService;
@@ -25,7 +26,7 @@ public class CommentController {
         return commentService.findByPostId(postId, pageable);
     }
     @GetMapping("/api/v1/comments/{id}")
-    public CommentDto findById(@PathVariable("id") String id) {
+    public CommentDto findById(@PathVariable("id") Comment.primaryKey id) {
         return commentService.findById(id);
     }
 
@@ -38,12 +39,12 @@ public class CommentController {
 
     @PutMapping("/api/v1/comments/{id}")
     public CommentDto update(
-            @PathVariable("id") String id,
+            @PathVariable("id") Comment.primaryKey id,
             @RequestBody CommentUpdateForm form) {
         return commentService.update(id, form);
     }
 @DeleteMapping("/api/v1/comments/{id}")
-    public void deleteById(@PathVariable("id") String id){
+    public void deleteById(@PathVariable("id") Comment.primaryKey id){
         commentService.deleteById(id);
     }
     @DeleteMapping("/api/v1/comments/email/{email}")

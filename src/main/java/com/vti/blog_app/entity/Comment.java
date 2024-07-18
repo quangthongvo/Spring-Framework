@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -16,21 +17,9 @@ import java.util.UUID;
 @Entity
 @Table(name = "comment")
 public class Comment {
-    @Id
-    @Column(name = "id")
-   // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GenericGenerator(
-            name = "comment_id_generator",
-            type = CommentIdGenerator.class
-    )
-   @GeneratedValue(generator = "comment_id_generator")
-    private String id;
-
-    @Column(name = "name", length = 50, nullable = false)
-    private String name;
-
-    @Column(name = "email", length = 75, nullable = false)
-    private String email;
+  @Id
+  @EmbeddedId
+  private primaryKey pk;
 
     @Column(name = "body", length = 100, nullable = false)
     private String body;
@@ -46,5 +35,14 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "post_id", referencedColumnName = "id")
     private Post post;
+    @Getter
+    @Setter
+    @Embeddable
+    public static class primaryKey implements Serializable {
+        @Column(name = "name", length = 50, nullable = false)
+        private String name;
 
+        @Column(name = "email", length = 75, nullable = false)
+        private String email;
+    }
 }
