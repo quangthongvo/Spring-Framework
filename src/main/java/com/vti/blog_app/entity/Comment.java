@@ -1,9 +1,11 @@
 package com.vti.blog_app.entity;
 
+import com.vti.blog_app.generator.CommentIdGenerator;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
@@ -17,14 +19,12 @@ public class Comment {
     @Id
     @Column(name = "id")
    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(
+    @GenericGenerator(
             name = "comment_id_generator",
-            sequenceName = "comment_id_sequence",
-            initialValue = 99,
-            allocationSize = 1
+            type = CommentIdGenerator.class
     )
-   @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+   @GeneratedValue(generator = "comment_id_generator")
+    private String id;
 
     @Column(name = "name", length = 50, nullable = false)
     private String name;
