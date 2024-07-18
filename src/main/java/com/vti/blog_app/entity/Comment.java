@@ -34,8 +34,9 @@ public class Comment {
     @UpdateTimestamp
     private LocalDateTime updateAt;
 
-    @ManyToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "id")
+    @OneToOne
+    @JoinColumn(name = "post_id",
+            referencedColumnName = "id")
     private Post post;
 
 }

@@ -11,7 +11,7 @@ public class PostMapper {
         post.setTitle(form.getTitle());
         post.setContent(form.getContent());
         post.setDescription(form.getDescription());
-        post.setStatus(form.getStatus());
+       // post.setStatus(form.getStatus());
         return post;
     }
     public static PostDto map(Post post){
@@ -22,13 +22,13 @@ public class PostMapper {
         dto.setDescription(post.getDescription());
         dto.setCreatedAt(post.getCreatedAt());
         dto.setUpdatedAt(post.getUpdatedAt());
-        dto.setStatus(post.getStatus());
+       // dto.setStatus(post.getStatus());
         return dto;
     }
     public static void map(PostUpdateForm form,Post post){
         post.setTitle(form.getTitle());
         post.setContent(form.getContent());
         post.setDescription(form.getDescription());
-        post.setStatus(form.getStatus());
+        //post.setStatus(form.getStatus());
     }
 }

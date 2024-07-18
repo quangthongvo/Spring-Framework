@@ -37,13 +37,9 @@ public class Post {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "post")
-    private List<Comment> comments;
+    @OneToOne(mappedBy = "post")
+    private Comment comments;
 
-    @Column(name = "status" , nullable = false)
-    //@Enumerated(EnumType.STRING)
-    @Convert(converter = PostStatusConverter.class)
-    private Status status;
     public enum Status{
         OPENING , CLOSED
     }
