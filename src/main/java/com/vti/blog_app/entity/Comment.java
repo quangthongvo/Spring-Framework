@@ -16,10 +16,15 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "comment")
+@IdClass(Comment.primaryKey.class)
 public class Comment {
   @Id
-  @EmbeddedId
-  private primaryKey pk;
+  @Column(name = "name", length = 50, nullable = false)
+  private String name;
+  @Id
+  @Column(name = "email", length = 75, nullable = false)
+  private String email;
+
 
     @Column(name = "body", length = 100, nullable = false)
     private String body;

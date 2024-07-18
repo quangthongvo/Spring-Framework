@@ -10,7 +10,6 @@ import java.util.UUID;
 @Getter
 @Setter
 public class CommentDto {
-   private Comment.primaryKey pk;
     private String name;
     private String email;
     private String body;
