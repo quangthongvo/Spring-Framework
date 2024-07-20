@@ -7,6 +7,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -34,10 +36,7 @@ public class Comment {
     @UpdateTimestamp
     private LocalDateTime updateAt;
 
-    @ManyToOne
-    @JoinColumn(
-            name = "post_id",
-            referencedColumnName = "id")
-    private Post post;
+   @OneToMany(mappedBy = "comment")
+    private List<PostComment> postComments;
 
 }

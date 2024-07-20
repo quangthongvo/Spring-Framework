@@ -1,11 +1,13 @@
 package com.vti.blog_app.service;
 
 import com.vti.blog_app.dto.CommentDto;
+import com.vti.blog_app.entity.PostComment;
 import com.vti.blog_app.form.CommentCreateForm;
 import com.vti.blog_app.form.CommentUpdateForm;
 import com.vti.blog_app.mapper.CommentMapper;
 import com.vti.blog_app.mapper.PostMapper;
 import com.vti.blog_app.repository.CommentRepository;
+import com.vti.blog_app.repository.PostCommentRepository;
 import com.vti.blog_app.repository.PostRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,12 +15,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 @Service
 @AllArgsConstructor
 public class CommentServiceImpl implements CommentService {
     private CommentRepository commentRepository;
     private PostRepository postRepository;
+    private PostCommentRepository postCommentRepository;
 
     @Override
     public Page<CommentDto> findAll(Pageable pageable) {
@@ -27,9 +31,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Page<CommentDto> findByPostId(Long postId, Pageable pageable) {
-        return commentRepository.findByPostId(postId, pageable)
-                .map(CommentMapper::map);
+   public Page<CommentDto> findByPostId(Long postId, Pageable pageable) {
+        //return commentRepository.findByPostId(postId, pageable)
+              //  .map(CommentMapper::map);
+        return Page.empty();
     }
 
     @Override
@@ -48,7 +53,10 @@ public class CommentServiceImpl implements CommentService {
         }
         var post = optional.get();
         var comment = CommentMapper.map(form);
-        comment.setPost(post);
+        var postComment = new PostComment();
+        postComment.setPost(post);
+        postComment.setComment(comment);
+        postCommentRepository.save(postComment);
         var savedComment = commentRepository.save(comment);
         return CommentMapper.map(savedComment);
     }

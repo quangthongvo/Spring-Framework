@@ -25,7 +25,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     // lay ra tat ca cac comment theo name hoac email
     List<Comment> findByNameOrEmail(String name, String email);
     // lay ra tat ca cac comment theo post id
-    Page<Comment> findByPostId(Long postId, Pageable pageable);
+    //Page<Comment> findByPostId(Long postId, Pageable pageable);
     // cach 2. @Query
     //
     @Modifying
