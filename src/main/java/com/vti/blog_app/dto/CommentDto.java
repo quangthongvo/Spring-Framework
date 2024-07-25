@@ -2,6 +2,7 @@ package com.vti.blog_app.dto;
 
 import com.vti.blog_app.controller.CommentController;
 import com.vti.blog_app.controller.PostController;
+import com.vti.blog_app.entity.Post;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
@@ -26,5 +27,8 @@ public class CommentDto extends RepresentationModel<CommentDto> {
         var dto = controller.findById(id);
         var link = linkTo(dto).withSelfRel();
         return add(link);
+    }
+
+    public void setPost(Post post) {
     }
 }

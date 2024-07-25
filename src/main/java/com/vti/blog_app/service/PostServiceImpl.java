@@ -5,10 +5,10 @@ import com.vti.blog_app.entity.Post;
 import com.vti.blog_app.form.PostCreateForm;
 import com.vti.blog_app.form.PostFilterForm;
 import com.vti.blog_app.form.PostUpdateForm;
-import com.vti.blog_app.mapper.PostMapper;
 import com.vti.blog_app.repository.PostRepository;
 import com.vti.blog_app.specification.PostSpecification;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,26 +21,29 @@ import java.util.function.Function;
 @AllArgsConstructor
 public class PostServiceImpl implements PostService{
     private PostRepository postRepository;
+    private ModelMapper modelMapper;
 
     @Override
     public Page<PostDto> findAll(PostFilterForm form,Pageable pageable) {
         var spec = PostSpecification.buildSpec(form);
         return postRepository.findAll(spec, pageable)
-                .map(PostMapper::map);
+                .map(post -> modelMapper.map(post, PostDto.class)
+                        .withSelfRel());
     }
 
     @Override
     public PostDto findById(Long id) {
        return postRepository.findById(id)
-               .map(PostMapper::map)
+               .map(post -> modelMapper.map(post, PostDto.class)
+                       .withSelfRel())
                .orElse(null);
     }
 
     @Override
     public PostDto create(PostCreateForm form) {
-        var post = PostMapper.map(form);
+        var post = modelMapper.map(form, PostDto.class);
         var savedPost = postRepository.save(post);
-        return PostMapper.map(savedPost);
+        return modelMapper.map(savedPost, PostDto.class);
     }
 
     @Override
@@ -50,9 +53,9 @@ public class PostServiceImpl implements PostService{
             return null;
         }
         var post = optional.get();
-        PostMapper.map(form, post);
+        modelMapper.map(form, post);
         var savedPost = postRepository.save(post);
-        return PostMapper.map(savedPost);
+        return modelMapper.map(savedPost, PostDto.class);
     }
 
     @Override
