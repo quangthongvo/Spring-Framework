@@ -1,7 +1,9 @@
 package com.vti.blog_app.mapper;
 
 import com.vti.blog_app.dto.PostDto;
+import com.vti.blog_app.dto.UserDto;
 import com.vti.blog_app.entity.Post;
+import com.vti.blog_app.entity.User;
 import com.vti.blog_app.form.PostCreateForm;
 import com.vti.blog_app.form.PostUpdateForm;
 
@@ -31,4 +33,6 @@ public class PostMapper {
         post.setDescription(form.getDescription());
         post.setStatus(Post.Status.valueOf(form.getStatus()));
     }
+
+
 }

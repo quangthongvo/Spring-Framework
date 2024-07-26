@@ -37,8 +37,8 @@ public class Post {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "post")
-    private List<Comment> comments;
+    //@OneToMany(mappedBy = "post")
+   // private List<Comment> comments;
 
     @Column(name = "status" , nullable = false)
     //@Enumerated(EnumType.STRING)
