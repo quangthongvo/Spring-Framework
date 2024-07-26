@@ -17,12 +17,12 @@ public class Comment {
     @Id
     @Column(name = "id")
    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(
-            name = "comment_id_generator",
-            sequenceName = "comment_id_sequence",
-            initialValue = 99,
-            allocationSize = 1
-    )
+    //@SequenceGenerator(
+           // name = "comment_id_generator",
+           // sequenceName = "comment_id_sequence",
+           // initialValue = 99,
+           // allocationSize = 1
+   // )
    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
