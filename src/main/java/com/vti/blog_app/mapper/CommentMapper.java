@@ -11,7 +11,7 @@ public class CommentMapper {
         var pk = new Comment.primaryKey();
         pk.setName(form.getName());
         pk.setEmail(form.getEmail());
-        comment.setPk(comment.getPk());
+        comment.setPk(pk);
         comment.setBody(comment.getBody());
         return comment;
     }
@@ -27,7 +27,7 @@ public class CommentMapper {
         var pk = new Comment.primaryKey();
         pk.setName(form.getName());
         pk.setEmail(form.getEmail());
-        comment.setPk(comment.getPk());
+        comment.setPk(pk);
         comment.setBody(form.getBody());
     }
 }

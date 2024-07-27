@@ -5,7 +5,6 @@ import com.vti.blog_app.entity.Comment;
 import com.vti.blog_app.form.CommentCreateForm;
 import com.vti.blog_app.form.CommentUpdateForm;
 import com.vti.blog_app.mapper.CommentMapper;
-import com.vti.blog_app.mapper.PostMapper;
 import com.vti.blog_app.repository.CommentRepository;
 import com.vti.blog_app.repository.PostRepository;
 import lombok.AllArgsConstructor;
