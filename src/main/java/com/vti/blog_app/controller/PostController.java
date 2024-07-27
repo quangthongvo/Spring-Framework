@@ -17,6 +17,7 @@ import java.util.List;
 @Validated
 @RestController
 @AllArgsConstructor
+@CrossOrigin("*")
 public class PostController {
     private PostService postService;
 

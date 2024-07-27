@@ -37,8 +37,13 @@ public class UserServicceImpl implements UserService, UserDetailsService {
         if (user == null){
             throw new UsernameNotFoundException(username);
         }
+        var role = user.getRole().toString();
         return new org.springframework.security.core.userdetails.User(
-                username, user.getPassword(), AuthorityUtils.NO_AUTHORITIES
+                username,
+                user.getPassword(),
+                AuthorityUtils.createAuthorityList(role)
+                //AuthorityUtils.NO_AUTHORITIES
+
         );
     }
 }
